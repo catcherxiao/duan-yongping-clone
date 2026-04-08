@@ -1,0 +1,10 @@
+.secrets/
+.browser/
+.venv/
+大道：段永平投..25.pdf
+source-materials/notes/xueqiu-archive/
+source-materials/notes/xueqiu-debug/
+source-materials/notes/pdf-ocr-rapidocr*/
+source-materials/notes/pdf-ocr-sample/
+source-materials/notes/*.cookie
+demo/.env

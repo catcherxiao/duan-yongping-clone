@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>段永平视角演示台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <section class="chat-shell">
+        <div class="chat-topbar">
+          <div class="topbar-left">
+            <div class="title-wrap">
+              <p class="eyebrow">Duan Yongping Perspective Demo</p>
+              <h1>段永平对话演示</h1>
+            </div>
+            <span class="status-pill" id="mode-pill">检测中...</span>
+          </div>
+          <button type="button" class="ghost-btn" id="reset-btn">清空</button>
+        </div>
+
+        <div class="tips-row">
+          <span class="tips-label">Tips</span>
+          <p class="tips-text">尽量先给结论，再回到生意本身、长期和能力圈。</p>
+        </div>
+
+        <div class="chat-log" id="chat-log">
+          <article class="message assistant">
+            <div class="message-row">
+              <img class="message-avatar" src="/duan-yongping-avatar.jpg" alt="段永平头像" />
+              <div class="message-bubble">你可以直接把问题丢给我。我会尽量用段永平式的判断方式，流式地把回答一段段吐出来。</div>
+            </div>
+          </article>
+        </div>
+
+        <form class="composer" id="composer">
+          <div class="prompt-strip" id="prompt-chips">
+            <button type="button" class="chip">这家公司跌了 40%，现在能不能买？</button>
+            <button type="button" class="chip">能不能开融资加杠杆长期拿好公司？</button>
+            <button type="button" class="chip">合作伙伴多次失信，还要不要继续？</button>
+            <button type="button" class="chip">订单很大，但回款不稳，要不要接？</button>
+            <button type="button" class="chip">现在 AI 创业很热，我要不要辞职？</button>
+            <button type="button" class="chip">孩子对投资有兴趣，要不要很早教？</button>
+          </div>
+
+          <label class="composer-label" for="message-input">输入问题</label>
+          <textarea
+            id="message-input"
+            name="message"
+            rows="4"
+            placeholder="比如：订单很大，但客户回款一直不稳定，这种生意值不值得接？"
+          ></textarea>
+          <div class="composer-actions">
+            <p class="hint-text">`Enter` 发送，`Shift + Enter` 换行</p>
+            <div class="action-group">
+              <button type="button" class="ghost-btn" id="stop-btn" disabled>停止</button>
+              <button type="submit" class="primary-btn" id="send-btn">发送</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

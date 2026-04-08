@@ -1,0 +1,4 @@
+interface:
+  display_name: "段永平 Perspective"
+  short_description: "用段永平式的本分、能力圈与长期主义框架分析问题"
+  default_prompt: "Use $duan-yongping-perspective to analyze this business or investment question with Duan Yongping-style thinking."

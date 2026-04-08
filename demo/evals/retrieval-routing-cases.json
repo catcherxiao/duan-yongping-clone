@@ -1,0 +1,92 @@
+[
+  {
+    "name": "具体公司看法",
+    "message": "对泡泡玛特这家公司你怎么看？",
+    "expected": {
+      "retrievalEligible": true,
+      "planType": "company-analysis",
+      "subject": "泡泡玛特"
+    }
+  },
+  {
+    "name": "具体公司估值",
+    "message": "泡泡玛特 PE 45 倍了，还能买吗？",
+    "expected": {
+      "retrievalEligible": true,
+      "planType": "company-analysis",
+      "subject": "泡泡玛特"
+    }
+  },
+  {
+    "name": "美股代码",
+    "message": "AAPL 还能不能长期拿？",
+    "expected": {
+      "retrievalEligible": true,
+      "planType": "company-analysis",
+      "subject": "AAPL"
+    }
+  },
+  {
+    "name": "港股代码",
+    "message": "0700.HK 现在怎么看？",
+    "expected": {
+      "retrievalEligible": true,
+      "planType": "company-analysis",
+      "subject": "0700.HK"
+    }
+  },
+  {
+    "name": "宽泛方法论",
+    "message": "对好公司应该怎么估值？",
+    "expected": {
+      "retrievalEligible": false,
+      "planType": "none",
+      "subject": null
+    }
+  },
+  {
+    "name": "热门但不懂",
+    "message": "现在有个很火的行业我不太懂，要不要先买一点试试？",
+    "expected": {
+      "retrievalEligible": false,
+      "planType": "none",
+      "subject": null
+    }
+  },
+  {
+    "name": "教育问题",
+    "message": "孩子对投资有兴趣，要不要很早教？",
+    "expected": {
+      "retrievalEligible": false,
+      "planType": "none",
+      "subject": null
+    }
+  },
+  {
+    "name": "人生问题",
+    "message": "人应该怎么找到自己的北斗星？",
+    "expected": {
+      "retrievalEligible": false,
+      "planType": "none",
+      "subject": null
+    }
+  },
+  {
+    "name": "创业方法论",
+    "message": "创业和打工怎么选？",
+    "expected": {
+      "retrievalEligible": false,
+      "planType": "none",
+      "subject": null
+    }
+  },
+  {
+    "name": "合作方法论",
+    "message": "遇到合作伙伴失信怎么处理？",
+    "expected": {
+      "retrievalEligible": false,
+      "planType": "none",
+      "subject": null
+    }
+  }
+]
