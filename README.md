@@ -230,7 +230,6 @@ duan-yongping-clone/
 ## 参考与致谢
 
 - 方法论参考：[alchaincyf/nuwa-skill](https://github.com/alchaincyf/nuwa-skill)
-- README 版式灵感参考：[zwbao/duan-yongping-skill](https://github.com/zwbao/duan-yongping-skill)
 - OpenAI 文档：[API Docs](https://developers.openai.com/api/docs)
 - Brave Search 文档：[Web Search API](https://api-dashboard.search.brave.com/app/documentation/web-search/get-started)
 
