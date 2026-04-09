@@ -181,7 +181,7 @@ function renderWelcomeMessage() {
     <article class="message assistant">
       <div class="message-row">
         <img class="message-avatar" src="/duan-yongping-avatar.jpg" alt="段永平头像" />
-        <div class="message-bubble">你可以直接把问题丢给我。我会尽量用段永平式的判断方式，流式地把回答一段段吐出来。</div>
+        <div class="message-bubble">你可以直接把问题丢给我，也可以接着追问，比如“那最大的风险呢？”“那护城河呢？”。我会尽量顺着上一轮继续聊，不每次都从头讲。</div>
       </div>
     </article>
   `;

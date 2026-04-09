@@ -1,80 +1,92 @@
-# 段永平 AI 分身 Skill
+<div align="center">
 
-这是一个可直接做成 OpenClaw skill 的项目，目标不是“模仿名人语录”，而是把段永平公开表达出来的思维方式整理成一个能长期复用的视角 skill。
+# 段永平 Clone
 
-它的定位是：
+> *「一般人总觉得做什么最重要，其实最重要的是不做什么。」*
 
-- 用段永平式框架判断生意、投资和经营问题
-- 强调本分、能力圈、长期主义、少犯错
-- 不做荐股，不做短线，不装成真人本人
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![OpenAI](https://img.shields.io/badge/OpenAI-gpt--5.4-black)](https://developers.openai.com/api/docs/models/all)
+[![RAG](https://img.shields.io/badge/RAG-Brave_Search-00A86B)](https://api-dashboard.search.brave.com/app/documentation/web-search/get-started)
+[![Demo](https://img.shields.io/badge/Demo-Streaming_Chat-blue)](./demo/README.md)
+[![Skill](https://img.shields.io/badge/Skill-Duan_Yongping_Perspective-blueviolet)](./SKILL.md)
 
-## 现在这版已经能做什么
+<br>
 
-根目录的 [SKILL.md](/Users/catcher_agent/Desktop/codex/段永平skill/SKILL.md) 已经是可发布结构，适合继续放进 GitHub 仓库，之后发布到 ClawHub。
+**把段永平公开表达里的判断框架，做成一个能安装、能多轮对话、能按近期信息补论据的 skill。**
 
-你可以直接让 agent 这样用：
+<br>
 
-- `切到段永平视角，帮我看这家公司是不是好生意`
-- `用段永平的方式看，这是不是件对的事情`
-- `如果按买股票就是买公司的思路，这个标的值不值得长期看`
+不是复读金句。  
+是把「本分 / 能力圈 / 买股票就是买公司 / 少犯错」真正做成一个可用的对话系统。
 
-为了让效果更稳定，我已经继续补了四层参考资料：
+[效果示例](#效果示例) · [快速开始](#快速开始) · [现在能做什么](#现在能做什么) · [它蒸馏了什么](#它蒸馏了什么) · [项目结构](#项目结构) · [诚实边界](#诚实边界)
 
-- [references/段永平思想体系深度调研-20260407.md](/Users/catcher_agent/Desktop/codex/段永平skill/references/段永平思想体系深度调研-20260407.md)
-- [references/段永平表达风格DNA分析.md](/Users/catcher_agent/Desktop/codex/段永平skill/references/段永平表达风格DNA分析.md)
-- [references/段永平案例库.md](/Users/catcher_agent/Desktop/codex/段永平skill/references/段永平案例库.md)
-- [examples/demo-conversation.md](/Users/catcher_agent/Desktop/codex/段永平skill/examples/demo-conversation.md)
+</div>
 
-这轮我又补了几块更偏“真实语料入口”的内容：
+---
 
-- [references/段永平真实采访索引-20260407.md](/Users/catcher_agent/Desktop/codex/段永平skill/references/段永平真实采访索引-20260407.md)
-- [scripts/fetch_xueqiu_timeline.py](/Users/catcher_agent/Desktop/codex/段永平skill/scripts/fetch_xueqiu_timeline.py)
+## 效果示例
 
-对应说明也放好了：
+```text
+用户      ❯ 对泡泡玛特这家公司你怎么看？
 
-- [scripts/README.md](/Users/catcher_agent/Desktop/codex/段永平skill/scripts/README.md)
-- [source-materials/notes/雪球抓取说明.md](/Users/catcher_agent/Desktop/codex/段永平skill/source-materials/notes/雪球抓取说明.md)
+段永平    ❯ 结论先说，我会把泡泡玛特看成一家已经证明了自己很会
+            “做内容商品化”和“运营用户情绪价值”的公司。生意不差，
+            甚至很强，但波动也会很大。
 
-另外，这个项目现在已经支持把本地扫描版 PDF 做 OCR：
+            这家公司真正值得看的，不是短期热度，而是三件事：
+            IP 能不能接力，用户为什么持续买，海外扩张能不能稳住。
 
-- 脚本：[scripts/ocr_pdf_rapidocr.py](/Users/catcher_agent/Desktop/codex/段永平skill/scripts/ocr_pdf_rapidocr.py)
-- 当前《大道》OCR 结果目录：`source-materials/notes/pdf-ocr-rapidocr-daodao/`
+            看懂的人可以长期跟踪；看不懂 IP 生命周期和海外扩张的人，
+            先别急。
+```
 
-我这次也把《大道》的 OCR 结果继续整理成了三份更适合 skill 读取的结构化笔记：
+```text
+用户      ❯ 那它最大的风险是什么？
 
-- [大道-目录与章节索引.md](/Users/catcher_agent/Desktop/codex/段永平skill/source-materials/notes/大道-目录与章节索引.md)
-- [大道-高频主题卡片.md](/Users/catcher_agent/Desktop/codex/段永平skill/source-materials/notes/大道-高频主题卡片.md)
-- [大道-问答表达模式.md](/Users/catcher_agent/Desktop/codex/段永平skill/source-materials/notes/大道-问答表达模式.md)
-- [大道-高价值问答案例块.md](/Users/catcher_agent/Desktop/codex/段永平skill/source-materials/notes/大道-高价值问答案例块.md)
+段永平    ❯ 结论先说，最大的风险不是短期股价波动，
+            而是“热度生意”能不能持续，也就是 IP 会不会接不上、
+            海外扩张会不会慢下来。
 
-现在更推荐的读取顺序是：
+            为什么这么说？两个点就够了。
+            第一，IP 热度消退是根上的风险。
+            第二，海外扩张已经看到边际放缓，这不是一门
+            可以简单线性外推的生意。
 
-- 先读 `大道-目录与章节索引.md` 找章节
-- 再读 `大道-高频主题卡片.md` 抓原则
-- 需要更像真实公开问答时，再读 `大道-问答表达模式.md`
-- 需要直接拼出一段“段永平式”回答时，再读 `大道-高价值问答案例块.md`
+            所以别把高增长当理所当然。
+            先看懂它到底靠什么长期赚钱，再决定要不要继续研究。
+```
 
-这样能避免 agent 把整本 `combined.txt` 一次性塞进上下文，也能更稳定地保留“段永平式判断”而不是只剩几句金句。
+```text
+用户      ❯ 孩子对投资有兴趣，要不要很早教？
 
-这批 OCR 原文默认只建议本地保留，不建议直接公开提交；我新整理出来的卡片和索引属于二次结构化笔记，更适合作为项目内部工作资料。
+段永平    ❯ 要教，但不要太早教“炒股”，要早一点教“生意”和“常识”。
 
-## 本地演示站点
+            投资最后比的不是技巧，是判断力。
+            先让他知道钱怎么来，好公司为什么好，
+            价格和价值为什么不是一回事。
 
-我也顺手给这个项目补了一个本地可跑的演示站点，目录在 [demo/README.md](/Users/catcher_agent/Desktop/codex/段永平skill/demo/README.md)。
+            先学会看生意，再谈股票。
+            先学会不懂不做，再谈赚钱。
+```
 
-它的特点是：
+当前版本的规则是：
 
-- 用网页直接演示“段永平式回答”的流式输出
-- 默认走本地 `mock` 模式，不依赖 API key
-- 如果配置了 OpenAI 兼容接口，会自动切到真实流式模式
-- 内置几组和《大道》案例块对应的推荐问题
-- `mock` 回答已经改成“案例块匹配式”生成，核心数据在 [demo/data/case-blocks.json](/Users/catcher_agent/Desktop/codex/段永平skill/demo/data/case-blocks.json)
-- 投资专项测试也单独数据化了，见 [demo/evals/investment-cases.json](/Users/catcher_agent/Desktop/codex/段永平skill/demo/evals/investment-cases.json)
-- 现在还支持公司分析类问题的一层 Brave 检索增强，但只在提到具体公司名或股票代码时触发，比如“对泡泡玛特这家公司你怎么看”或 “AAPL 还能不能长期拿”
+- 具体公司或股票问题：优先检索最近 `12-18` 个月的财报、业绩会、管理层表述和风险变化
+- 多轮追问：像 `那护城河呢？`、`估值呢？`、`那它最大的风险是什么？` 会自动承接上一轮公司
+- 宽泛问题：教育、创业、人生、方法论默认不触发检索，直接按段永平式表达回答
 
-最简单的启动方式：
+更多示例见 [examples/demo-conversation.md](./examples/demo-conversation.md) 和 [demo/multiturn-smoke-20260409.md](./demo/multiturn-smoke-20260409.md)。
+
+---
+
+## 快速开始
+
+### 1. 跑本地 demo
 
 ```bash
+cp demo/.env.example demo/.env
+# 填入 OPENAI_API_KEY 和 BRAVE_API_KEY
 node demo/server.mjs
 ```
 
@@ -84,72 +96,153 @@ node demo/server.mjs
 http://127.0.0.1:3033
 ```
 
-如果你后面想接真实模型，可以按 [demo/README.md](/Users/catcher_agent/Desktop/codex/段永平skill/demo/README.md) 里的环境变量说明来配。
+完整说明见 [demo/README.md](./demo/README.md)。
 
-## 为什么这样包装
+### 2. 作为本地 skill 使用
 
-如果你想上 OpenClaw 官方公开注册表，最稳的做法不是把它包装成“荐股大师”，而是：
-
-- 一个“商业与投资思维框架 skill”
-- 强调公开资料蒸馏
-- 明确边界，不给个性化投资建议
-- 不做短线喊单和价格预测
-
-这样更接近 `nuwa-skill` 产出的单人视角 skill，也更容易通过公开分发场景下的风险判断。
-
-## OpenClaw 安装方式
-
-截至 2026-04-07，OpenClaw 官方文档已经明确支持通过 ClawHub 安装 skill。
-
-如果这个 skill 已经发布到 ClawHub，用户可以直接安装：
+如果你想先本地挂到 OpenClaw：
 
 ```bash
-openclaw skills install duan-yongping-perspective
+mkdir -p ~/.openclaw/skills
+git clone https://github.com/catcherxiao/duan-yongping-clone.git ~/.openclaw/skills/duan-yongping-perspective
 ```
 
-然后重开一个 OpenClaw 会话，让它重新加载 skills。
+然后在对话里直接触发：
 
-如果还没发布到 ClawHub，也可以先把这个项目作为一个本地 skill 使用：把整个目录放到工作区的 `skills/duan-yongping-perspective/` 下，或者全局的 `~/.openclaw/skills/duan-yongping-perspective/` 下。
-
-如果你想要“大家一句命令就能装”，应该优先走 ClawHub。把 GitHub 仓库链接直接丢给 agent 让它自动安装，属于某些客户端或代理层的便捷能力，不应当替代 OpenClaw 官方分发路径。
-
-## 发布到 ClawHub
-
-官方文档给出的发布路径是 `clawhub skill publish <path>`。按现在这个项目结构，可以这样发：
-
-```bash
-pnpm add -g clawhub
-clawhub login
-clawhub skill publish . \
-  --slug duan-yongping-perspective \
-  --name "段永平 Perspective" \
-  --version 0.1.0 \
-  --tags latest,perspective,business,investing
+```text
+用段永平的方式看
+切到段永平视角
+从大道角度想想
+帮我看这家公司是不是好生意
 ```
 
-发布完成后，别人就可以用这条官方命令安装：
+当前仓库还没有正式发到 ClawHub，所以更适合先本地安装。
 
-```bash
-openclaw skills install duan-yongping-perspective
+### 3. 推荐测试问题
+
+```text
+对泡泡玛特这家公司你怎么看？
+那它最大的风险是什么？
+那护城河呢？
+估值呢？
+孩子对投资有兴趣，要不要很早教？
 ```
 
-## 还建议你补的两步
+---
 
-在你准备真的公开上架前，建议再补两件事：
+## 现在能做什么
 
-1. 把仓库名定成 `duan-yongping-perspective` 或 `duan-yongping-skill`。
-2. 再补一轮公开资料整理，尤其是段永平在雪球《方略》访谈、OPPO “本分”官方表述、以及“做对的事情 / 不为清单”相关材料。
+- 具体公司分析：按“怎么赚钱 / 用户为什么持续买 / 管理层 / 风险与能力圈”拆问题，再用近期公开信息补论据
+- 多轮追问承接：如果上一轮已经聊到具体公司，下一轮会继续围绕同一家公司回答
+- 本地流式 demo：支持 OpenAI `gpt-5.4`，并接入 Brave Search 做公司题检索增强
+- 近期论据优先：默认优先最近 `12-18` 个月的信息，尽量不用过旧素材
+- 本地语料支持：已经整理《大道》OCR、主题卡片、问答案例块，适合继续打磨人物风格
+- 评测和冒烟：已提供投资风格检查、检索路由检查、多轮追问冒烟脚本
 
-我已经先放了一个维护用的资料笔记在 [references/source-notes.md](/Users/catcher_agent/Desktop/codex/段永平skill/references/source-notes.md)。
+核心入口：
 
-另外我也在项目下预留了本地语料目录 [source-materials/README.md](/Users/catcher_agent/Desktop/codex/段永平skill/source-materials/README.md)，你可以把讲话原文、访谈逐字稿、历史书籍摘录等都放进去。推荐把有版权风险的全文只保留在本地，不要直接公开提交。
+- [SKILL.md](./SKILL.md)
+- [demo/server.mjs](./demo/server.mjs)
+- [demo/public/app.js](./demo/public/app.js)
+- [demo/data/case-blocks.json](./demo/data/case-blocks.json)
+- [examples/demo-conversation.md](./examples/demo-conversation.md)
 
-另外，雪球这条线我已经实际验证过：匿名请求会被 WAF 挡住，所以项目里提供的是“带浏览器 Cookie 的本地抓取脚本”，而不是不稳定的匿名硬爬方案。
+---
 
-## 参考来源
+## 它蒸馏了什么
 
-- [Nuwa Skill 仓库](https://github.com/alchaincyf/nuwa-skill)
-- [OpenClaw ClawHub 官方文档](https://docs.openclaw.ai/tools/clawhub)
-- [OpenClaw skills CLI 文档](https://docs.openclaw.ai/cli/skills)
-- [OPPO 关于我们：本分](https://www.oppo.com/tw/about/)
-- [雪球《方略》第 13 期：方三文对话段永平](https://www.youtube.com/watch?v=1ikLMn2naSA)
+段永平不是学院派，更像长期主义的实战经营者和投资者。这个项目当前重点蒸馏的是他的**判断方式**，不是语录复读。
+
+| 核心框架 | 一句话 |
+| --- | --- |
+| **本分** | 先问这件事对不对，再问赚不赚钱 |
+| **不懂不做** | 看不懂的生意，再热也不要硬上 |
+| **买股票就是买公司** | 真正该研究的是公司、用户、现金流和管理层 |
+| **能力圈** | 知道自己不懂什么，比装懂更重要 |
+| **少犯错** | 长期收益很多时候来自避开大错，而不是追逐神操作 |
+
+当前仓库里已经整理出的资料层包括：
+
+- 思想框架：[references/段永平思想体系深度调研-20260407.md](./references/段永平思想体系深度调研-20260407.md)
+- 表达 DNA：[references/段永平表达风格DNA分析.md](./references/段永平表达风格DNA分析.md)
+- 案例库：[references/段永平案例库.md](./references/段永平案例库.md)
+- 真实采访入口：[references/段永平真实采访索引-20260407.md](./references/段永平真实采访索引-20260407.md)
+- 《大道》主题笔记：[source-materials/notes/大道-高频主题卡片.md](./source-materials/notes/大道-高频主题卡片.md)
+- 《大道》问答案例块：[source-materials/notes/大道-高价值问答案例块.md](./source-materials/notes/大道-高价值问答案例块.md)
+
+一句话说，这个项目不是在“背段永平说过什么”，而是在训练一个系统：**碰到问题时，先回到生意和本质，再决定该不该做。**
+
+---
+
+## 项目结构
+
+```text
+duan-yongping-clone/
+├── SKILL.md
+├── README.md
+├── LICENSE
+├── agents/
+│   └── openai.yaml
+├── demo/
+│   ├── README.md
+│   ├── server.mjs
+│   ├── public/
+│   ├── data/
+│   ├── evals/
+│   └── run-*.mjs
+├── examples/
+│   └── demo-conversation.md
+├── references/
+│   ├── 段永平思想体系深度调研-20260407.md
+│   ├── 段永平表达风格DNA分析.md
+│   ├── 段永平案例库.md
+│   └── 段永平真实采访索引-20260407.md
+├── scripts/
+│   ├── README.md
+│   ├── fetch_xueqiu_timeline.py
+│   └── ocr_pdf_rapidocr.py
+└── source-materials/
+    ├── README.md
+    └── notes/
+```
+
+---
+
+## 诚实边界
+
+这个项目能做的：
+
+- 用段永平式框架分析生意、公司、经营和长期决策
+- 模拟更接近他公开表达的节奏和判断方式
+- 在具体公司问题上，引入近期公开信息做论据补强
+
+这个项目做不到的：
+
+- 不能替代段永平本人，更不能代表他的实时私下判断
+- 不做个性化投资建议，不给具体仓位，不做短线预测
+- 不能保证所有公开信息都完整无误，尤其是媒体二手摘要
+- 雪球全量问答目前不是内置静态库，仓库里提供的是本地抓取脚本和后续整理路径
+
+**一个不告诉你边界在哪的 skill，不值得信。**
+
+---
+
+## 参考与致谢
+
+- 方法论参考：[alchaincyf/nuwa-skill](https://github.com/alchaincyf/nuwa-skill)
+- README 版式灵感参考：[zwbao/duan-yongping-skill](https://github.com/zwbao/duan-yongping-skill)
+- OpenAI 文档：[API Docs](https://developers.openai.com/api/docs)
+- Brave Search 文档：[Web Search API](https://api-dashboard.search.brave.com/app/documentation/web-search/get-started)
+
+---
+
+<div align="center">
+
+**语录** 只能告诉你他说过什么。  
+**段永平 Clone** 试着帮你用他的方式看问题。
+
+<br>
+
+*做对的事情，把事情做对。*
+
+</div>
